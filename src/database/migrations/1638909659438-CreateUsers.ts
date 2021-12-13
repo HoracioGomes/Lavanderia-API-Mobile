@@ -1,21 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreatePecasRoupas1638487330051 implements MigrationInterface {
+export class CreateUsers1638909659438 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         await queryRunner.createTable(
             new Table({
-                name: "pecas_roupas",
+                name: "users",
                 columns: [
-                    // {
-                    //     name: "id",
-                    //     type: "varchar",
-                    //     isPrimary: true,
-                    //     isGenerated: true,
-                    //     generationStrategy: "uuid",
-                    //     default: "uuid_generate_v4()",
-                    // },
                     {
                         name: "id",
                         type: "integer",
@@ -30,21 +21,15 @@ export class CreatePecasRoupas1638487330051 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: "status",
+                        name: "email",
                         type: "varchar",
-                        isNullable: false
+                        isNullable: false,
+                        isUnique: true
                     },
                     {
-                        name: "data",
-                        type: "timestamp with time zone",
-                        isNullable: false
-                    },
-                    {
-                        name: "posicao_na_lista",
-                        type: "integer",
-                        isGenerated: true,
-                        generationStrategy: "increment",
-                        isNullable: false
+                        name: "password",
+                        type: "varchar",
+                        isNullable: false,
                     },
                     {
                         name: "created_at",
@@ -58,12 +43,15 @@ export class CreatePecasRoupas1638487330051 implements MigrationInterface {
                     }
                 ]
 
+
+
             })
-        );
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("pecas_roupas");
+        await queryRunner.dropTable("users")
+
     }
 
 }

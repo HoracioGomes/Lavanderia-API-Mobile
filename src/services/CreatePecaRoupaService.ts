@@ -16,12 +16,13 @@ class CreatePecaRoupaService {
 
     }
 
-    public async salvar({ nome, status, data }: PecaRoupaCriacao): Promise<PecaRoupa> {
+    public async salvar({ nome, status, data, usuarioId }: PecaRoupaCriacao): Promise<PecaRoupa> {
         const pecaRoupaRepository = getCustomRepository(PecaRoupaRepository);
         const pecaRoupa: PecaRoupa = pecaRoupaRepository.create({
             nome: nome,
             status: status,
             data: data,
+            userId: usuarioId
         });
 
         await pecaRoupaRepository.save(pecaRoupa)
