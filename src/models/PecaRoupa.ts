@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn, IsNull, Generated } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+
+import Usuario from "./Usuario";
 
 @Entity("pecas_roupas")
 class PecaRoupa{
@@ -13,6 +15,15 @@ class PecaRoupa{
     data: Date;
     @Column({type: "integer", name: "posicao_na_lista", generated: true})
     posicaoNaLista: number;
+    @Column({name: "user_id"})
+    userId: number;
+    @ManyToOne(() => Usuario)
+    @JoinColumn({name: "user_id"})
+    usuario: Usuario
+    @CreateDateColumn()
+    created_at: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
 
 
 }
